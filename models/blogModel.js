@@ -30,7 +30,8 @@ const BlogPostSchema = new Schema({
 
     state:{
        type:String,
-       enum:['draft','published']
+       enum:['draft','published'],
+       default:'draft'
     },
 
    read_count:{
