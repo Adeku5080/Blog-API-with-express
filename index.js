@@ -5,7 +5,7 @@ const morgan = require("morgan");
 const authRoute = require("./routes/auth")
  const userRouter = require("./routes/userRoutes")
  const blogRouter = require("./routes/blogRoutes")
-
+ 
  require("./authMiddleware/auth")//signup and login middleware
 
 // console.log(process.env);

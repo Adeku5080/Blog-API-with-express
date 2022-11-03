@@ -4,6 +4,7 @@ const Blog = require('../models/blogModel')
 
 const avgTimeToReadAWord = 0.5;
 
+
 exports.createAPost=async(req,res)=>{
     const postBody = req.body.body;
     const length = postBody.split(' ').length;
