@@ -1,3 +1,4 @@
+const { find, findOne } = require("../models/blogModel");
 const BlogPost = require("../models/blogModel");
 const Blog = require("../models/blogModel");
 
@@ -12,7 +13,9 @@ exports.createAPost = async (req, res) => {
   const requestObject = {
     title: req.body.title,
     body: req.body.body,
+    tags: req.body.tags,
     reading_time: readingTime,
+    owner_id: req.body.owner_id,
   };
   try {
     const newPost = await BlogPost.create(requestObject);
@@ -26,12 +29,24 @@ exports.createAPost = async (req, res) => {
 };
 
 exports.getAllPosts = async (req, res) => {
+  const ownerId = req.body.owner_id;
   try {
-    const publishedPosts = await BlogPost.find({ state: "published" });
+    if(!ownerId){
 
-    return res.status(200).json({
-      data: publishedPosts,
-    });
+       const publishedPosts = await BlogPost.find({ state: "published" });
+     
+      return res.status(200).json({
+        data: publishedPosts,
+      })
+    }else{
+      const posts = await BlogPost.find({owner_id : ownerId})
+
+      res.status(200).json({
+        data:{
+          posts
+        }
+      })
+    }
   } catch (err) {
     return res.status(500).json({
       message: "An error occurred",
@@ -41,9 +56,16 @@ exports.getAllPosts = async (req, res) => {
 
 exports.getAPost = async (req, res) => {
   const postId = req.params.id;
-  console.log;
+  let postCount;
   try {
-    const post = await BlogPost.find({ _id: postId, state: "published" });
+    if(req.method === "GET"){
+       const post = await BlogPost.findById({_id :postId})
+      //  console.log(post.read_count);
+       postCount = post.read_count + 1;
+    }
+    let post = await BlogPost.find({ _id: postId, state: "published" });
+       
+
     if (post.length == 0) {
       res.status(404).json({
         message: "no post with this id is published",
@@ -64,18 +86,25 @@ exports.getAPost = async (req, res) => {
 exports.updateAPost = async (req, res) => {
   const postId = req.params.id;
   const postBody = req.body;
-  try {
-    const post = await BlogPost.findByIdAndUpdate(postId, postBody, {
-      new: true,
-      runValidators: true,
-    });
+  const ownerId = req.body.owner_id;
 
-    res.status(200).json({
-      status: "success",
-      data: {
-        post,
-      },
-    });
+  try {
+    const post = await BlogPost.findOne({ _id: postId });
+    if (post.owner_id === ownerId) {
+      const updatedPost = await BlogPost.findByIdAndUpdate(postId, postBody, {
+        new: true,
+        runValidators: true,
+      });
+      res.status(200).json({
+        data: {
+          updatedPost,
+        },
+      });
+    } else {
+      res.status(401).json({
+        messeage: "you are not allowed to update this post",
+      });
+    }
   } catch (err) {
     console.log(err);
   }
@@ -83,11 +112,20 @@ exports.updateAPost = async (req, res) => {
 
 exports.deleteAPost = async (req, res) => {
   const postId = req.params.id;
+  const ownerId = req.body.owner_id
   try {
-    await BlogPost.findByIdAndDelete(postId);
-    res.status(204).json({
-      status: "succesful",
-    });
+    const post = await BlogPost.findOne({ _id: postId });
+    if(post.owner_id === ownerId){
+      await BlogPost.findByIdAndDelete(postId);
+      res.status(204).json({
+        status: "succesful",
+      });
+    }else{
+      res.status(401).json({
+        message :"You are not allowed to delete this blogPost"
+      })
+    }
+   
   } catch (err) {
     res.status(404).json({
       status: "fail",

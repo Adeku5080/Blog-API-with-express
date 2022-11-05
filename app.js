@@ -10,7 +10,7 @@ require("./authMiddleware/auth"); //signup and login middleware
 
 // console.log(process.env);
 
-const PORT = 4000;
+// const PORT = 4000;
 
 const app = express();
 

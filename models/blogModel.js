@@ -25,9 +25,12 @@ const BlogPostSchema = new Schema({
     tags:[String],
 
     author:{
-        type:String,
+        type:String
     },
+    owner_id : {
+         type:String,
 
+    },
     state:{
        type:String,
        enum:['draft','published'],
@@ -35,7 +38,8 @@ const BlogPostSchema = new Schema({
     },
 
    read_count:{
-    type:Number
+    type:Number,
+    default:0
    },
 
    reading_time:{
