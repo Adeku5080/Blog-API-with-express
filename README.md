@@ -60,3 +60,58 @@ This is an api for a blog
 |  state |  string |  required, enum: ['draft','published'],default:draft |
 |  tags | [string] |
 
+
+
+## APIs
+---
+
+### Signup User
+
+- Route: /signup
+- Method: POST
+- Body: 
+```
+{
+  "email": "doe@example.com",
+  "password": "Password1",
+  "firstname": "jon",
+  "lastname": "doe",
+}
+```
+
+- Responses
+
+Success
+```
+{
+    message: 'Signup successful',
+    user: {
+        "email": "doe@example.com",
+        "password": "Password1",
+        "firstname": "jon",
+        "lastname": "doe",
+    }
+}
+```
+---
+### Login User
+
+- Route: /login
+- Method: POST
+- Body: 
+```
+{
+  "password": "Password1",
+  "username": 'jon_doe",
+}
+```
+
+- Responses
+
+Success
+```
+{
+    message: 'Login successful',
+    token: 'sjlkafjkldsfjsd'
+}
+```
