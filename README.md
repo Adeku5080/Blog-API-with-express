@@ -23,4 +23,12 @@ This is an api for a blog
 15. When a single blog is requested, the api should return the user information(the author) with the blog. The read_count of the blog too should be updated by 1
 16. Come up with any algorithm for calculating the reading_time of the blog.
 17. Write tests for all endpoints
+---
+## Setup
+- Install NodeJS, mongodb
+- pull this repo
+- update env with example.env
+- run `npm run start:dev`
+
+---
 
