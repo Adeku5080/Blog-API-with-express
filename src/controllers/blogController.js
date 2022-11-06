@@ -1,5 +1,5 @@
 const Blog = require("../models/blog");
-const User = require("../models/user")
+const User = require("../models/user");
 const { blogStates } = require("../utils/constants");
 const { getPaginationMetadata } = require("../utils/helpers");
 
@@ -16,6 +16,9 @@ exports.list = async (req, res) => {
     const orderBy = orderableFields.includes(req.query.order_by)
       ? req.query.order_by
       : "created_at";
+    const orderDirection = ["asc", "des"].includes(req.query.direction)
+      ? req.query.direction
+      : "desc";
     const criteria = {
       state: blogStates.published,
     };
@@ -36,7 +39,9 @@ exports.list = async (req, res) => {
     const blogs = await Blog.find(criteria)
       .skip(skip)
       .limit(size)
-      .sort(orderBy);
+      .sort({
+        [orderBy]: orderDirection === "desc" ? -1 : 1,
+      });
 
     return res.status(200).json({
       data: blogs,
@@ -59,7 +64,7 @@ exports.list = async (req, res) => {
  */
 exports.view = async (req, res) => {
   try {
-    const blog = await Blog.find({
+    const blog = await Blog.findOne({
       _id: req.params.id,
       state: blogStates.published,
     });
@@ -71,7 +76,7 @@ exports.view = async (req, res) => {
     }
 
     blog.user = await User.findOne({ _id: blog.owner_id });
-     console.log(blog.read_count,"ali")
+    console.log(blog.read_count, "ali");
     // update read-count.
     Blog.updateOne(
       {
@@ -79,7 +84,7 @@ exports.view = async (req, res) => {
       },
       {
         $set: {
-          read_count: (blog.read_count || 0)  + 1,
+          read_count: (blog.read_count || 0) + 1,
         },
       }
     ).catch((error) => {
