@@ -41,7 +41,6 @@ This is an api for a blog
 ### User
 | field  |  data_type | constraints  |
 |---|---|---|
-|  id |  string |  required |
 |  firstname | string  |  required|
 |  lastname  |  string |  required |
 |  email     | string  |  required,unique|
