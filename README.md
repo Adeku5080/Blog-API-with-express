@@ -31,4 +31,33 @@ This is an api for a blog
 - run `npm run start:dev`
 
 ---
+## Base URL
+- https://fair-gold-salamander-cuff.cyclic.app 
+
+
+## Models
+---
+
+### User
+| field  |  data_type | constraints  |
+|---|---|---|
+|  id |  string |  required |
+|  firstname | string  |  required|
+|  lastname  |  string |  required |
+|  email     | string  |  required,unique|
+|  password |   string |  
+
+
+### Blog
+| field  |  data_type | constraints  |
+|---|---|---|
+|  timestamp|  date | 
+|  title| number  |  required,unique|
+|  description  |  number |  required  |
+|  body    | array  |  required |
+|  read_count |   number |  default:0  |
+|  reading_time |  number |  required |
+|  author | string | 
+|  state |  string |  required, enum: ['draft','published'],default:draft |
+|  tags | [string] |
 
