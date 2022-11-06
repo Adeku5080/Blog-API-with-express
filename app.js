@@ -2,11 +2,10 @@ const express = require("express");
 const dotenv = require("dotenv").config();
 const mongoose = require("mongoose");
 const morgan = require("morgan");
-const authRoute = require("./routes/auth");
-const userRouter = require("./routes/userRoutes");
-const blogRouter = require("./routes/blogRoutes");
+const authRoutes = require("./routes/auth");
+const blogRoutes = require("./routes/blog");
 
-require("./authMiddleware/auth"); //signup and login middleware
+require("./src/middlewares/auth"); //signup and login middleware
 
 // console.log(process.env);
 
@@ -18,9 +17,8 @@ const app = express();
 app.use(morgan("dev"));
 app.use(express.json());
 
-app.use("/", authRoute);
-app.use(userRouter);
-app.use(blogRouter);
+app.use(authRoutes);
+app.use(blogRoutes);
 // app.get('/',(req,res)=>{
 //     res.status(200).json({
 //         msg : "welcome to home page"
