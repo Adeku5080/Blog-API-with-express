@@ -125,7 +125,7 @@ Success
     - per_page (default: 20)
     - order_by (read_count | reading_time | timsestamp)
     - order (options: asc | desc, default: desc)
-    -search_by (author | title | tags)
+    - search_by (author | title | tags)
    
 - Responses
 
