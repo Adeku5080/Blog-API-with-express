@@ -33,7 +33,7 @@ This is an api for a blog
 
 ---
 ## Base URL
-- https://fair-gold-salamander-cuff.cyclic.app 
+- https://busy-rose-xerus-hose.cyclic.app 
 
 
 ## Models
