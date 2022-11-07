@@ -116,6 +116,7 @@ Success
     token: 'sjlkafjkldsfjsd'
 }
 ```
+
 ---
 ### get posts (published posts)
 
@@ -150,7 +151,9 @@ Success
       "created_at": "2022-11-07T00:18:05.834Z",
       "updated_at": "2022-11-07T00:23:15.489Z",
 }
+```
 
+---
 
 ### Get posts(get posts belonging to logged in user)
 
