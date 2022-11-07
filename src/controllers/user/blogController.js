@@ -10,9 +10,7 @@ const { blogStates } = require("../../utils/constants");
 /**
  * Get all blogs owned by the logged in user.
  *
- * @param {Object} req
- * @param {Object} res
- * @returns {Promise<any>}
+ * 
  */
 exports.list = async (req, res) => {
   try {
@@ -46,9 +44,7 @@ exports.list = async (req, res) => {
 /**
  * Get details of a blog owned by the logged in user.
  *
- * @param {Object} req
- * @param {Object} res
- * @returns {Promise<any>}
+ * 
  */
 exports.view = async (req, res) => {
   const { id } = req.params;
@@ -80,9 +76,7 @@ exports.view = async (req, res) => {
 /**
  * Create a new blog.
  *
- * @param {Object} req
- * @param {Object} res
- * @returns {Promise<any>}
+ * 
  */
 exports.create = async (req, res) => {
   try {
@@ -116,9 +110,7 @@ exports.create = async (req, res) => {
 /**
  * Update some/all of the properties of a blog.
  *
- * @param {Object} req
- * @param {Object} res
- * @returns {Promise<any>}
+ * 
  */
 exports.partialUpdate = async (req, res) => {
   const { id } = req.params;

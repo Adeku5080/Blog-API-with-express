@@ -6,9 +6,6 @@ const { getPaginationMetadata } = require("../utils/helpers");
 /**
  * Get all published posts.
  *
- * @param {Object} req
- * @param {Object} res
- * @returns {Promise<any>}
  */
 exports.list = async (req, res) => {
   try {
@@ -58,9 +55,6 @@ exports.list = async (req, res) => {
 /**
  * Get the details of a blog.
  *
- * @param {Object} req
- * @param {Object} res
- * @returns {Promise<any>}
  */
 exports.view = async (req, res) => {
   try {
