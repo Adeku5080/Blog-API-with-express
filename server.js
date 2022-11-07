@@ -3,7 +3,7 @@ const app = require("./app");
  
 const PORT = 4000;
 
-mongoose.connect('mongodb+srv://tohbaba:Adeku1997@cluster0.htsowjn.mongodb.net/?retryWrites=true&w=majority');
+mongoose.connect("mongodb://localhost:27017/blog");
 
 mongoose.connection.on("connected", () => {
   console.log("Connected to MongoDB Successfully");
