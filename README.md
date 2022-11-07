@@ -1,5 +1,6 @@
 # Blog-API-with-express
 This is an api for a blog
+- created two controllers one for just logged in users and the other for both logged in and logged in users
 
 1. Users should have a first_name, last_name, email, password, (you can add other attributes you want to store about the user)
 2. A user should be able to sign up and sign in into the blog app
@@ -116,7 +117,7 @@ Success
 }
 ```
 ---
-### get posts
+### get posts (published posts)
 
 - Route: /blog
 - Method: GET
@@ -149,3 +150,182 @@ Success
       "created_at": "2022-11-07T00:18:05.834Z",
       "updated_at": "2022-11-07T00:23:15.489Z",
 }
+
+
+### Get posts(get posts belonging to logged in user)
+
+- Route: /user/blogs
+- Method: GET
+- Header
+    - Authorization: Bearer {token}
+- Query params: 
+    - page (default: 1)
+    - per_page (default: 10)
+    - filter_by (state)
+  
+- Responses
+
+Success
+```
+{
+  "data": [
+    {
+      "_id": "63680b507e9954b24f4a0deb",
+      "title": "when we were young",
+      "body": "hellooo story of my life adeku it wehnt ouuu",
+      "tags": [
+        "entertainment",
+        "latest"
+      ],
+      "author": "jumai adeku",
+      "owner_id": "6362f7e460d1e3d234546d8a",
+      "state": "published",
+      "read_count": 3,
+      "reading_time": 4.5,
+      "created_at": "2022-11-06T19:29:26.901Z",
+      "updated_at": "2022-11-06T19:45:00.346Z",
+      "__v": 0
+    },
+    {
+      "_id": "63680f5c157d4f5e20b55d2a",
+      "title": "when the days go by",
+      "body": "hellooo story of my life adeku it wehnt ouuu",
+      "tags": [
+        "entertainment",
+        "latest"
+      ],
+      "author": "jumai adeku",
+      "owner_id": "6362f7e460d1e3d234546d8a",
+      "state": "published",
+      "read_count": 0,
+      "reading_time": 4.5,
+      "created_at": "2022-11-06T19:43:41.005Z",
+      "updated_at": "2022-11-06T20:50:34.781Z",
+      "__v": 0
+    }
+  ]
+}
+
+```
+
+---
+
+### Get post(get details of a post belonging to the logged in user)
+- Route: /user/blogs/:id
+- Method:GET
+-  Header
+    - Authorization: Bearer {token}
+- Response
+
+successes
+```
+{
+  "data": {
+    "_id": "63680b507e9954b24f4a0deb",
+    "title": "when we were young",
+    "body": "hellooo story of my life adeku it wehnt ouuu",
+    "tags": [
+      "entertainment",
+      "latest"
+    ],
+    "author": "jumai adeku",
+    "owner_id": "6362f7e460d1e3d234546d8a",
+    "state": "published",
+    "reading_time": 4.5,
+    "created_at": "2022-11-06T19:29:26.901Z",
+    "updated_at": "2022-11-06T19:45:00.346Z",
+  }
+}
+
+```
+
+
+---
+ ## Get post (get a post details by both logged in and non-logged in users)
+ 
+ - Route: /blogs/:id
+- Method: GET
+
+- Responses
+
+Success
+```
+{
+   {
+  "data": {
+    "title": "what defines a very good codebase",
+    "body": "a code base that is clean,well formatted and indented",
+    "tags": [
+    "author": "ali adeku",
+    "owner_id": "63658fd38b0b16f8387db1ba",
+    "state": "draft",
+    "read_count": 0,
+    "reading_time": 4.5,
+    "created_at": "2022-11-07T09:06:14.042Z",
+    "updated_at": "2022-11-07T09:06:14.042Z",
+    "_id": "6368cb0a84b441d5aa084d49",
+   
+  }
+}
+}
+```
+
+---
+
+### Create Post
+
+- Route: /user/blogs
+- Method: POST
+- Header
+    - Authorization: Bearer {token}
+- Body: 
+```
+{
+  "title" : "what defines a very good codebase",
+  "body" : "a code base that is clean,well formatted and indented",
+
+}
+```
+- Responses
+
+Success
+```
+{
+   {
+  "data": {
+    "title": "what defines a very good codebase",
+    "body": "a code base that is clean,well formatted and indented",
+    "tags": [
+    "author": "ali adeku",
+    "owner_id": "63658fd38b0b16f8387db1ba",
+    "state": "draft",
+    "read_count": 0,
+    "reading_time": 4.5,
+    "created_at": "2022-11-07T09:06:14.042Z",
+    "updated_at": "2022-11-07T09:06:14.042Z",
+    "_id": "6368cb0a84b441d5aa084d49",
+   
+  }
+}
+}
+```
+
+
+---
+### update post (update post belonging to logged in user)
+ - Route: /user/blogs/:id
+- Method: PATCH
+- Header:
+    - Authorization: Bearer {token}
+
+
+---
+
+### Delete post (delete post belonging to logged in user )
+
+- Route: /user/blogs/:id
+- Method: DELETE
+- Header:
+    - Authorization: Bearer {token}
+---
+
