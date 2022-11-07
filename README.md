@@ -1,6 +1,6 @@
 # Blog-API-with-express
 This is an api for a blog
-- created two controllers one for just logged in users and the other for both logged in and logged in users
+- created two controllers one for just logged in users and the  other for any type of users
 
 1. Users should have a first_name, last_name, email, password, (you can add other attributes you want to store about the user)
 2. A user should be able to sign up and sign in into the blog app
