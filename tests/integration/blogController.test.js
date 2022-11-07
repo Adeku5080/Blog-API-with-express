@@ -2,7 +2,7 @@ const request = require("supertest");
 const app = require("../../app");
 const sinon = require("sinon");
 
-const BlogPost = require("../../models/blogModel");
+const BlogPost = require("../../src/models/blog");
 
 let sandbox;
 
@@ -15,23 +15,28 @@ describe("Blog Controller", () => {
     sandbox.restore();
   });
 
-  describe("createAPost", () => {
-    it("should return an empty data if no posts are found", async () => {});
-
-    it("should return an empty data if no published posts are found", async () => {});
-
-    it("should return a 500 error if there is an exception", async () => {
-      sandbox.stub(BlogPost, "find").rejects(new Error("fake error"));
-
-      const response = await request(app).get("/blogposts");
-
-      expect(response.status).toBe(500);
-    });
-
-    it("should do something", async () => {
-      const response = await request(app).get("/blogposts");
+  
+  describe("get posts", () => {
+    it("get all posts", async () => {
+      const response = await request(app).get("/blogs");
 
       expect(response.status).toBe(200);
     });
   });
+
+  // describe("createAPost", () => {
+  //   it("should return an empty data if no posts are found", async () => {});
+
+  //   it("should return an empty data if no published posts are found", async () => {});
+
+  //   it("should return a 500 error if there is an exception", async () => {
+  //     sandbox.stub(BlogPost, "find").rejects(new Error("fake error"));
+
+  //     const response = await request(app).get("/blogs");
+
+  //     expect(response.status).toBe(500);
+  //   });
+
+  
+  // });
 });
