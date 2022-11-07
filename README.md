@@ -115,3 +115,37 @@ Success
     token: 'sjlkafjkldsfjsd'
 }
 ```
+---
+### get posts
+
+- Route: /blog
+- Method: GET
+- Query params: 
+    - page (default: 1)
+    - per_page (default: 20)
+    - order_by (read_count | reading_time | timsestamp)
+    - order (options: asc | desc, default: desc)
+    -search_by (author | title | tags)
+   
+- Responses
+
+Success
+```
+{
+   data": [
+    {
+      "_id": "63684f599c52563a8f04b486",
+      "title": "when the days go by",
+      "body": "hellooo story of my life adeku it wehnt ouuu",
+      "tags": [
+        "entertainment",
+        "latest"
+      ],
+      "author": "ali adeku",
+      "owner_id": "63684f2b9c52563a8f04b481",
+      "state": "published",
+      "read_count": 0,
+      "reading_time": 4.5,
+      "created_at": "2022-11-07T00:18:05.834Z",
+      "updated_at": "2022-11-07T00:23:15.489Z",
+}
