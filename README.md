@@ -75,8 +75,8 @@ This is an api for a blog
 {
   "email": "doe@example.com",
   "password": "Password1",
-  "firstname": "jon",
-  "lastname": "doe",
+  "first_name": "jon",
+  "last_name": "doe",
 }
 ```
 
@@ -89,8 +89,8 @@ Success
     user: {
         "email": "doe@example.com",
         "password": "Password1",
-        "firstname": "jon",
-        "lastname": "doe",
+        "first_name": "jon",
+        "last_name": "doe",
     }
 }
 ```
@@ -103,7 +103,7 @@ Success
 ```
 {
   "password": "Password1",
-  "username": 'jon_doe",
+  "email": "doe@example.com",
 }
 ```
 
