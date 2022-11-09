@@ -70,7 +70,7 @@ exports.view = async (req, res) => {
     }
 
     blog.user = await User.findOne({ _id: blog.owner_id });
-    console.log(blog.read_count, "ali");
+
     // update read-count.
     Blog.updateOne(
       {
@@ -85,7 +85,7 @@ exports.view = async (req, res) => {
       console.error(error);
     });
 
-    return res.json({
+    return res.status(200).json({
       data: blog,
     });
   } catch (err) {

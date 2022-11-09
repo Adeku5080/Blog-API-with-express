@@ -15,14 +15,22 @@ describe("Blog Controller", () => {
     sandbox.restore();
   });
 
-  
+
   describe("get posts", () => {
-    it("get all posts", async () => {
+    it("should return all posts", async () => {
       const response = await request(app).get("/blogs");
 
       expect(response.status).toBe(200);
     });
   });
+
+  describe("get a post",()=>{
+    it("get a post details", async ()=>{
+       const response = await request(app).get("/blogs/63684f599c52563a8f04b486")
+
+       expect (response.status).toBe(200);
+    })
+  })
 
   // describe("createAPost", () => {
   //   it("should return an empty data if no posts are found", async () => {});

@@ -13,7 +13,7 @@ authRouter.post(
     delete req.user.password;
     delete req.user.password;
 
-    res.json({
+    res.status(201).json({
       message: "Signup Succesful",
       user: req.user,
     });
