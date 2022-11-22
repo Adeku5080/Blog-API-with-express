@@ -1,21 +1,33 @@
 const request = require("supertest");
 const app = require("../../app");
-const sinon = require("sinon");
+const UserModel = require("../../src/models/user");
 
 const BlogPost = require("../../src/models/blog");
 
-let sandbox;
-
+let token;
 describe("Blog Controller", () => {
-  beforeAll(() => {
-    sandbox = sinon.createSandbox();
+  beforeEach(async () => {
+    await UserModel.create({
+      email: "aliadeku.aam@gmail.com",
+      password: "Adeku123",
+      last_name: "Adeku",
+      first_name: "Ali",
+    });
+
+    const loginResponse = await request(app)
+      .post("/login")
+      .set("content-type", "application/json")
+      .send({
+        email: "aliadeku.aam@gmail.com",
+        password: "Adeku123",
+      });
+
+    token = loginResponse.body.token;
   });
 
-  afterEach(() => {
-    sandbox.restore();
-  });
+  afterEach(() => {});
 
-
+  //get all posts
   describe("get posts", () => {
     it("should return all posts", async () => {
       const response = await request(app).get("/blogs");
@@ -24,27 +36,22 @@ describe("Blog Controller", () => {
     });
   });
 
-  describe("get a post",()=>{
-    it("get a post details", async ()=>{
-       const response = await request(app).get("/blogs/63684f599c52563a8f04b486")
+  //create a post
+  describe("create post", () => {
+    it("should create a post", async () => {
+      const response = await request(app)
+        .post("/user/blogs")
+        .set("content-type", "application/json")
+        .set("Authorization", `Bearer ${token}`)
+        .send({
+          title: "A new dawn",
+          body: "a new dawn has come.",
+        });
 
-       expect (response.status).toBe(200);
-    })
-  })
+      expect(response.status).toBe(201);
+      expect(response.body).toHaveProperty("data");
+    });
+  });
 
-  // describe("createAPost", () => {
-  //   it("should return an empty data if no posts are found", async () => {});
 
-  //   it("should return an empty data if no published posts are found", async () => {});
-
-  //   it("should return a 500 error if there is an exception", async () => {
-  //     sandbox.stub(BlogPost, "find").rejects(new Error("fake error"));
-
-  //     const response = await request(app).get("/blogs");
-
-  //     expect(response.status).toBe(500);
-  //   });
-
-  
-  // });
 });
