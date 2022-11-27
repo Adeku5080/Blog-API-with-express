@@ -3,11 +3,15 @@ const app = require("../../app");
 const UserModel = require("../../src/models/user");
 
 const BlogPost = require("../../src/models/blog");
+const { post } = require("../../app");
+const user = require("../../src/models/user");
 
 let token;
+let owner;
+
 describe("Blog Controller", () => {
   beforeEach(async () => {
-    await UserModel.create({
+   owner = await UserModel.create({
       email: "aliadeku.aam@gmail.com",
       password: "Adeku123",
       last_name: "Adeku",
@@ -53,5 +57,57 @@ describe("Blog Controller", () => {
     });
   });
 
+  //get a post
+  describe("get a post", () => {
+    let post;
 
+    beforeEach(async () => {
+      // owner = await UserModel.create({
+      //   email: "mohammed.aam@gmail.com",
+      //   password: "Adeku123",
+      //   last_name: "Adeku",
+      //   first_name: "Ali",
+      // });
+
+      post = await BlogPost.create({
+        title: "test post",
+        body: "my testing skill is getting better",
+        owner_id : `${owner._id}`
+      });
+      console.log(post);
+    });
+
+    it("should get a post", async () => {
+      const response = await request(app)
+        .get(`/user/blogs/${post._id}`)
+        .set("owner_id", `${owner._id}`)
+        .set("Authorization", `Bearer ${token}`);
+
+      expect(response.status).toBe(200);
+    });
+  });
+
+  //update a post
+  // describe("update a post",() => {
+  //   it("should create a post",async ()=>{
+  //     const post = await BlogPost.create({
+  //    title : "test post",
+  //    body : "my testing skill is getting better"
+  //  })
+  //  })
+
+  //  const data ={
+  //   title:"updated title",
+  //   body :"updated body"
+  //  }
+
+  //  it("should update a post " ,async()=>{
+  //    const response = await request(app)
+  //    .patch('/user/blog' + post.id)
+  //    .send(data)
+  //    .set("Authorization", `Bearer ${token}`);
+
+  //    expect(response.status)
+  //  })
+  // })
 });

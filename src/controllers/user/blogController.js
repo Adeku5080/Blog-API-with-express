@@ -61,11 +61,11 @@ exports.view = async (req, res) => {
       });
     }
 
-    return res.json({
+    return res.status(200).json({
       data: blog,
     });
   } catch (error) {
-    console.error(error);
+    console.log(error);
 
     return res.status(500).json({
       message: "An error occurred.",
