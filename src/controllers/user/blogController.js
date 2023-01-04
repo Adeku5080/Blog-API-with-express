@@ -8,9 +8,10 @@ const {
 const { blogStates } = require("../../utils/constants");
 
 /**
- * Get all blogs owned by the logged in user.
- *
- *
+ * 
+ * @param {*} req 
+ * @param {*} res 
+ * @returns 
  */
 exports.list = async (req, res) => {
   try {
@@ -42,9 +43,10 @@ exports.list = async (req, res) => {
 };
 
 /**
- * Get details of a blog owned by the logged in user.
- *
- *
+ * 
+ * @param {*} req 
+ * @param {*} res 
+ * @returns 
  */
 exports.view = async (req, res) => {
   const { id } = req.params;
@@ -74,9 +76,10 @@ exports.view = async (req, res) => {
 };
 
 /**
- * Create a new blog.
- *
- *
+ * 
+ * @param {*} req 
+ * @param {*} res 
+ * @returns 
  */
 exports.create = async (req, res) => {
   try {
@@ -108,9 +111,10 @@ exports.create = async (req, res) => {
 };
 
 /**
- * Update some/all of the properties of a blog.
- *
- *
+ * 
+ * @param {*} req 
+ * @param {*} res 
+ * @returns 
  */
 exports.partialUpdate = async (req, res) => {
   const { id } = req.params;
@@ -184,7 +188,7 @@ exports.delete = async (req, res) => {
 
     await Blog.deleteOne({ _id: id });
 
-    return res.status(204).send();
+    return res.status(200).send();
   } catch (error) {
     console.log(error);
     return res.status(500).json({

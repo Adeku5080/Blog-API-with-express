@@ -9,7 +9,7 @@ module.exports = {
     return {
       message: "Please, make sure all the data are valid",
       errors,
-    };
+    }; 
   },
 
   getPaginationMetadata(rawPage = 1, rawSize = 20) {

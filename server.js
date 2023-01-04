@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const app = require("./app");
+const logger = require("./logger/logger")
 
 const PORT = 4000;
 
@@ -17,5 +18,5 @@ mongoose.connection.on("error", (err) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`listen on port ${PORT}`);
+  logger.info(`listen on port ${PORT}`);
 });

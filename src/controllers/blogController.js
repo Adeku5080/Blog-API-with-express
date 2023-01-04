@@ -4,8 +4,10 @@ const { blogStates } = require("../utils/constants");
 const { getPaginationMetadata } = require("../utils/helpers");
 
 /**
- * Get all published posts.
- *
+ * 
+ * @param { } req 
+ * @param {*} res 
+ * @returns 
  */
 exports.list = async (req, res) => {
   try {
@@ -53,8 +55,10 @@ exports.list = async (req, res) => {
 };
 
 /**
- * Get the details of a blog.
- *
+ * 
+ * @param {*} req 
+ * @param {*} res 
+ * @returns 
  */
 exports.view = async (req, res) => {
   try {
