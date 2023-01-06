@@ -1,15 +1,16 @@
 const Blog = require("../models/blog");
 const User = require("../models/user");
 const { blogStates } = require("../utils/constants");
+const CustomAPIErrors = require("../../errors/custom-error")
 const { getPaginationMetadata } = require("../utils/helpers");
 
 /**
- * 
- * @param { } req 
- * @param {*} res 
- * @returns 
+ *
+ * @param { } req
+ * @param {*} res
+ * @returns
  */
-exports.list = async (req, res) => {
+exports.list = async (req, res, next) => {
   try {
     const orderableFields = ["created_at", "read_count", "reading_time"];
     const orderBy = orderableFields.includes(req.query.order_by)
@@ -46,21 +47,17 @@ exports.list = async (req, res) => {
       data: blogs,
     });
   } catch (error) {
-    console.error(error);
-
-    return res.status(500).json({
-      message: "An error occurred.",
-    });
+    next(error);
   }
 };
 
 /**
- * 
- * @param {*} req 
- * @param {*} res 
- * @returns 
+ *
+ * @param {*} req
+ * @param {*} res
+ * @returns
  */
-exports.view = async (req, res) => {
+exports.view = async (req, res, next) => {
   try {
     const blog = await Blog.findOne({
       _id: req.params.id,
@@ -93,10 +90,6 @@ exports.view = async (req, res) => {
       data: blog,
     });
   } catch (err) {
-    console.error(err);
-
-    return res.status(500).json({
-      message: "An error occurred.",
-    });
+    next(err);
   }
 };

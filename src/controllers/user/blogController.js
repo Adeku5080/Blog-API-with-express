@@ -1,5 +1,6 @@
 const Blog = require("../../models/blog");
 const User = require("../../models/user");
+const CustomAPIErrors = require("../../../errors/custom-error");
 const {
   extractErrorResponse,
   getTimeToRead,
@@ -8,12 +9,12 @@ const {
 const { blogStates } = require("../../utils/constants");
 
 /**
- * 
- * @param {*} req 
- * @param {*} res 
- * @returns 
+ *
+ * @param {*} req
+ * @param {*} res
+ * @returns
  */
-exports.list = async (req, res) => {
+exports.list = async (req, res, next) => {
   try {
     const criteria = {
       owner_id: req.user._id,
@@ -34,21 +35,17 @@ exports.list = async (req, res) => {
       data: blogs,
     });
   } catch (error) {
-    console.error(error);
-
-    return res.status(500).json({
-      message: "An error occurred.",
-    });
+    next(error);
   }
 };
 
 /**
- * 
- * @param {*} req 
- * @param {*} res 
- * @returns 
+ *
+ * @param {*} req
+ * @param {*} res
+ * @returns
  */
-exports.view = async (req, res) => {
+exports.view = async (req, res, next) => {
   const { id } = req.params;
 
   try {
@@ -58,30 +55,30 @@ exports.view = async (req, res) => {
     });
 
     if (!blog) {
-      return res.status(404).json({
-        message: "Blog not found.",
-      });
+      // return res.status(404).json({
+      //   message: "Blog not found.",
+      // });
+
+      return next(
+        new CustomAPIErrors("blog with the given id does not exist", 404)
+      );
     }
 
     return res.status(200).json({
       data: blog,
     });
   } catch (error) {
-    console.log(error);
-
-    return res.status(500).json({
-      message: "An error occurred.",
-    });
+    next(error);
   }
 };
 
 /**
- * 
- * @param {*} req 
- * @param {*} res 
- * @returns 
+ *
+ * @param {*} req
+ * @param {*} res
+ * @returns
  */
-exports.create = async (req, res) => {
+exports.create = async (req, res, next) => {
   try {
     const user = await User.findOne({ _id: req.user._id });
     const blog = await Blog.create({
@@ -99,24 +96,17 @@ exports.create = async (req, res) => {
       data: blog,
     });
   } catch (error) {
-    if (error.name === "ValidationError") {
-      return res.status(422).json(extractErrorResponse(error));
-    }
-
-    console.log(error);
-    return res.status(500).json({
-      message: "an error occurred",
-    });
+    next(error);
   }
 };
 
 /**
- * 
- * @param {*} req 
- * @param {*} res 
- * @returns 
+ *
+ * @param {*} req
+ * @param {*} res
+ * @returns
  */
-exports.partialUpdate = async (req, res) => {
+exports.partialUpdate = async (req, res, next) => {
   const { id } = req.params;
 
   try {
@@ -155,14 +145,7 @@ exports.partialUpdate = async (req, res) => {
 
     return res.status(204).send();
   } catch (error) {
-    if (error.name === "ValidationError") {
-      return res.status(422).json(extractErrorResponse(error));
-    }
-
-    console.log(error);
-    return res.status(500).json({
-      message: "an error occurred",
-    });
+    next(error);
   }
 };
 
@@ -172,7 +155,7 @@ exports.partialUpdate = async (req, res) => {
  * @param {Object} req
  * @param {Object} res
  */
-exports.delete = async (req, res) => {
+exports.delete = async (req, res, next) => {
   try {
     const { id } = req.params;
     const blog = await Blog.findOne({
@@ -190,9 +173,6 @@ exports.delete = async (req, res) => {
 
     return res.status(200).send();
   } catch (error) {
-    console.log(error);
-    return res.status(500).json({
-      message: "an error occurred",
-    });
+    next(error);
   }
 };
