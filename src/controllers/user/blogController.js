@@ -46,29 +46,28 @@ exports.list = async (req, res, next) => {
  * @returns
  */
 exports.view = async (req, res, next) => {
-  const { id } = req.params;
-
   try {
+    const { id } = req.params;
     const blog = await Blog.findOne({
       _id: id,
       owner_id: req.user._id,
     });
 
     if (!blog) {
-      // return res.status(404).json({
-      //   message: "Blog not found.",
-      // });
+      return res.status(404).json({
+        message: "Blog not found.",
+      });
 
-      return next(
-        new CustomAPIErrors("blog with the given id does not exist", 404)
-      );
+      // return next(
+      //   new CustomAPIErrors("blog with the given id does not exist", 404)
+      // );
     }
 
     return res.status(200).json({
       data: blog,
     });
   } catch (error) {
-    next(error);
+    console.log(error)
   }
 };
 
@@ -160,7 +159,7 @@ exports.delete = async (req, res, next) => {
     const { id } = req.params;
     const blog = await Blog.findOne({
       _id: id,
-      user: req.user._id,
+      owner_id: req.user._id,
     });
 
     if (!blog) {

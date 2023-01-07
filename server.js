@@ -18,5 +18,5 @@ mongoose.connection.on("error", (err) => {
 });
 
 app.listen(PORT, () => {
-  logger.info(`listen on port ${PORT}`);
+  console.log(`listen on port ${PORT}`);
 });

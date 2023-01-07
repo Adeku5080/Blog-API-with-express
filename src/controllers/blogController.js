@@ -70,7 +70,7 @@ exports.view = async (req, res, next) => {
       });
     }
 
-    blog.user = await User.findOne({ _id: blog.owner_id });
+  blog.user = await User.findOne({ _id: blog.owner_id });
 
     // update read-count.
     Blog.updateOne(
