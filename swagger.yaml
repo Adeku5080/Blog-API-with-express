@@ -1,0 +1,147 @@
+openapi: 3.0.0
+info:
+  title: blog API
+  contact: {}
+  version: '1.0'
+servers:
+- url: https://busy-rose-xerus-hose.cyclic.app
+  variables: {}
+paths:
+  /user/blogs:
+    get:
+      tags:
+      - Admin
+      summary: get blogposts
+      operationId: getblogposts
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+    post:
+      tags:
+      - Admin
+      summary: create blogpost
+      operationId: createblogpost
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /user/blogs/{id}:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+        description: The blogpost ID
+    get:
+      tags:
+      - Admin
+      summary: get a blogpost
+      operationId: getablogpost
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+    patch:
+      tags:
+      - Admin
+      summary: update a blogpost
+      operationId: updateablogpost
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+    delete:
+      tags:
+      - Admin
+      summary: delete a blogpost
+      operationId: deleteablogpost
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /login:
+    get:
+      tags:
+      - Auth
+      summary: login
+      operationId: login
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /signup:
+    post:
+      tags:
+      - Auth
+      summary: register
+      operationId: register
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /blogs:
+    get:
+      tags:
+      - Blog
+      summary: get blogposts
+      operationId: Getgetblogposts
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /blogs/{id}:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+        description: The blogpost ID
+    get:
+      tags:
+      - Blog
+      summary: get a blogpost
+      operationId: Getgetablogpost
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+components:
+  securitySchemes:
+    httpBearer:
+      type: http
+      scheme: bearer
+security:
+- httpBearer: []
+tags:
+
+- name: Admin
+  description: ''
+- name: Auth
+  description: ''
+- name: Blog
+  description: ''
