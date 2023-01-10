@@ -57,17 +57,13 @@ exports.view = async (req, res, next) => {
       return res.status(404).json({
         message: "Blog not found.",
       });
-
-      // return next(
-      //   new CustomAPIErrors("blog with the given id does not exist", 404)
-      // );
     }
 
     return res.status(200).json({
       data: blog,
     });
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
 };
 

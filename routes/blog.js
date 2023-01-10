@@ -25,7 +25,6 @@ blogRouter.post(
   userBlogController.create
 );
 
-
 blogRouter.patch(
   "/user/blogs/:id",
   passport.authenticate("jwt", { session: false }),

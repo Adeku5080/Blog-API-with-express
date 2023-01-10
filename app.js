@@ -9,9 +9,13 @@ const errorHandler = require("./src/middlewares/error-handler");
 require("./src/middlewares/auth"); //signup and login middleware
 
 const app = express();
+const cors = require("cors")
+
 
 // middlewares
 app.use(express.json());
+app.use(cors())
+
 app.use(httpLogger);
 
 app.use(authRoutes);
