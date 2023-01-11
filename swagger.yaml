@@ -78,16 +78,6 @@ paths:
       summary: login
       operationId: login
       parameters: []
-       requestBody:
-        description: ''
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/loginRequest'
-            example:
-              email: aliadeku.aam@gmail.com
-              password: secret
-        required: true
       responses:
         '200':
           description: ''
@@ -101,18 +91,6 @@ paths:
       summary: register
       operationId: register
       parameters: []
-      requestBody:
-        description:''
-        content:
-          application/json:
-            schema:
-              $ref:'#/components/schemas/registerRequest'
-            example:
-              first_name: Ali
-              last_name: Adeku  
-              email: aliadeku.aam@gmail.com
-              password: secret
-        required: true      
       responses:
         '200':
           description: ''
