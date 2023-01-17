@@ -91,6 +91,17 @@ paths:
       summary: register
       operationId: register
       parameters: []
+       requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterUserRequest'
+            example:
+              name: bob
+              email: bob@gmail.com
+              password: secret
+        required: true
       responses:
         '200':
           description: ''
